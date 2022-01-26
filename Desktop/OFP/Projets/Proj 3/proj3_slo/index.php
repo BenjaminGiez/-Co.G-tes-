@@ -61,7 +61,7 @@ $password = '';
 try{
     $dbco = new PDO("mysql:host=$servname", $username, $password);
     $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "CREATE DATABASE IF NOT EXISTS gites";
+    $sql = "CREATE DATABASE IF NOT EXISTS gites DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
     $dbco->exec($sql);
     echo '<div class="echo"> Base de données "Gîtes" bien créée =====(ಠ_ಠ)====</div>';
 }
@@ -92,96 +92,6 @@ try{
 catch(PDOException $e){
 echo ' Erreur lors de la création de la table "Utilisateurs" ' . $e->getMessage();
 }
-
-
-//Création tables ▼ Prestataires ▼
-            $servname = 'localhost';
-            $dbname = 'gites';
-            $user = 'root';
-            $pass = '';
-try{
-    $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
-    $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "CREATE TABLE IF NOT EXISTS Prestataires (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(25) NOT NULL,
-            userpass VARCHAR(65) NOT NULL,
-            mail VARCHAR(50) NOT NULL,
-            phone INTEGER(10) NOT NULL,
-            UNIQUE(mail))";
-
-$dbco->exec($sql);
-echo '<div class="echo"> Table "Prestataires" bien créée (ノಠ益ಠ)ノ彡┻━┻ </div>'; 
-}
-catch(PDOException $e){
-echo ' Erreur lors de la création de la table "Prestataires" ' . $e->getMessage();
-}
-
-
-//Création tables ▼ Réservations ▼
-            $servname = 'localhost';
-            $dbname = 'gites';
-            $user = 'root';
-            $pass = '';
-try{
-        $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
-        $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "CREATE TABLE IF NOT EXISTS Reservations (
-                id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                date_arrive int(25) NOT NULL,
-                date_depart int(25) NOT NULL)";
-// ▲ Ad ids ! ▲
-$dbco->exec($sql);
-echo '<div class="echo"> Table "Reservations" bien créée ᕕ(ಠ_ಠ)ᕗ🔗 </div>'; 
-}
-catch(PDOException $e){
-echo ' Erreur lors de la création de la table "Reservations " ' . $e->getMessage();
-}
-
-//Création tables ▼ Gîtes Réservés ▼
-$servname = 'localhost';
-$dbname = 'gites';
-$user = 'root';
-$pass = '';
-try{
-$dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
-$dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "CREATE TABLE IF NOT EXISTS GitesReserv(
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    statut boolean NOT NULL)";
-// ▲ Ajouter id résa ! ▲
-
-$dbco->exec($sql);
-echo '<div class="echo"> Table "Gîtes Réservés" bien créée 🔐🏡 </div>'; 
-}
-catch(PDOException $e){
-echo ' Erreur lors de la création de la table "Gîtes Réservés " ' . $e->getMessage();
-}
-
-
-//Création tables ▼ Gîtes Occupés ▼
-$servname = 'localhost';
-$dbname = 'gites';
-$user = 'root';
-$pass = '';
-try{
-$dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
-$dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "CREATE TABLE IF NOT EXISTS GitesOccup(
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    arrive date NOT NULL,
-    depart date NOT NULL,
-    statut boolean NOT NULL)";
-// ▲ Ajouter id du gîtes et id de la résa ! ▲
-
-$dbco->exec($sql);
-echo '<div class="echo"> Table "Gîtes Occupés" bien créée ⚔🏡 </div>'; 
-}
-catch(PDOException $e){
-echo ' Erreur lors de la création de la table "Gîtes Occupés " ' . $e->getMessage();
-}
-
-
 //Création tables ▼ Gîtes ▼
 $servname = 'localhost';
 $dbname = 'gites';
@@ -197,10 +107,7 @@ $sql = "CREATE TABLE IF NOT EXISTS mes_gites(
     Nbre_couchage INT,
     Nbre_sdb INT,
     Emplacement_geo VARCHAR(60) NOT NULL,
-    Prix INT (5) NOT NULL,
-    Photo URL NOT NULL;
-    Disponible boolean)";
-
+    Prix INT (5) NOT NULL,)";
 
 $dbco->exec($sql);
 echo '<div class="echo"> Table "Mes gîtes" bien créée 🏡🏡🏡 </div>'; 

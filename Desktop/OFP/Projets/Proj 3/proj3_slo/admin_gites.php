@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php
+    /*
 $mysqli = new mysqli("localhost", "root", "", "gites");
 $mysqli->set_charset("utf8");
 $requete = "SELECT * FROM  mes_gites";
@@ -19,7 +20,7 @@ while ($ligne = $result->fetch_assoc()){
 }
 $mysqli->close();
 
-
+*/
 ?>
 </body>
 </html>
