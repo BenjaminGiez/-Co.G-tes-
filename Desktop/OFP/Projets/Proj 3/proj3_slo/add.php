@@ -7,14 +7,13 @@
     <link href="styles/main.css" rel="stylesheet">
     <title>Ajouter un hébergement</title>
 </head>
+
 <body>
     <?php
     ?>
 <section id="formulaire">
         <h1>Ajouter un hébergement :</h1>
-
         <br>
-
         <form action="" method="post">
 
     <legend>Décrivez votre gîte</legend><br>
@@ -37,22 +36,11 @@
                     <input type="number" id="brooms" name="brooms" placeholder="">
                 </div>
                 <div>
-                <!-- Photo du bien
-                <form enctype="multipart/form-data" action="#" method="post">
-        <input type="hidden" name="MAX_FILE_SIZE" value="250000" accept=".jpg, .jpeg, .png" multiple>
-        <input type="file" /> -->
-
-        <!--<form method="post" enctype="multipart/form-data">
-            <div>
-                <label for="image_uploads">Sélectionner des images à uploader au format PNG ou JPG</label>
-                <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
-            </div>
-            <div class="preview">
-                <p>Aucun sélectionné </p>
-            </div> -->
-            
-        
-
+                Photo du bien
+                <form action='add.php' method="POST" enctype="multipart/form-data" >
+                    <label for="file">Fichier</label>
+                    <input type="file" name="file">
+                    <button type="submit"> Enregistrer</button>
                 </div>
                 <br>
                 <div class="c100">
@@ -61,9 +49,10 @@
                 
                 <div class="c100">
                     <label for="price">Prix : </label>
-                    <input type="number" id="price" name="price" placeholder="€€€">
+                    <input type="number" id="price" name="price" placeholder="€€€"><br>
+                        Valider
                     <div class="c100" id="submit">
-                        <input type="submit" value="Envoyer">
+                        <input type="submit" value="✅">
                     </div>
                     <br>
                     
@@ -74,13 +63,31 @@
 <a href="index.php"> <button type="button" class="btn">Retour Tableau de Bord</button></a><br>
 
 
-
 </body>
 </html>
 <?php
+
+//=======================================================================  //
+//      ▼        AJOUTER DES IMAGES DANS LA BASE DE DONNÉE  !! ▼           //
+//=======================================================================  //
+if(isset($_FILES['file'])){                            // Boucle permettant de reconnaître la valeur $_FILES
+
+$tmpName = $_FILES['file']['tmp_name'];
+$name = $_FILES['file']['name'];
+$size = $_FILES['file']['size'];
+$error = $_FILES['file']['error'];
+$type = $_FILES['file']['type'];
+
+move_uploaded_file($tmpName, './assets/'.$name);
+}
+
+//=======================================================================  //
+
+
 //======================//
 // Connection à la bdd ▼//
 //======================//
+
 $servname = 'localhost';
 $dbname = 'gites';
 $user = 'root';
@@ -98,11 +105,6 @@ if (
     isset($_POST['place'])  && !empty($_POST['place']) &&
     isset($_POST['price'])  && !empty($_POST['price']) 
 ) 
-
-//=======================================================================  //
-//               AJOUTER DES IMAGES DANS LA BASE DE DONNÉE  !!             //
-//=======================================================================  //
-
 try {
     $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
     $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -114,7 +116,6 @@ try {
     :Emplacement_geo, :Prix)
     ");
     
-
 $sth->bindParam(':Nom_gite', $title);
 $title = $_POST['title'];
 
@@ -139,11 +140,7 @@ $sth->bindParam(':Prix', $price);
 $price = $_POST['price'];
 $sth->execute();
 
-
-
         echo 'Hébergement ajoutée !';
-
-
 
 }    catch (PDOException $e) {
         echo "Erreur lors de l'envois des données du gîte : " . $e->getMessage();

@@ -114,5 +114,23 @@ echo '<div class="echo"> Table "Mes gîtes" bien créée 🏡🏡🏡 </div>';
 }
 catch(PDOException $e){
 echo ' Erreur lors de la création de la table "Mes gîtes" ' . $e->getMessage();
+}
+//Création tables ▼ fileup ▼
+$servname = 'localhost';
+$dbname = 'gites';
+$user = 'root';
+$pass = '';
+try{
+$dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
+$dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$sql = "CREATE TABLE IF NOT EXISTS fileup (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR (255) NOT NULL)";
+
+$dbco->exec($sql);
+echo '<div class="echo"> Table "fileup" bien créée 🏡🏡🏡 </div>'; 
+}
+catch(PDOException $e){
+echo ' Erreur lors de la création de la table "fileup" ' . $e->getMessage();
 }*/
 ?>

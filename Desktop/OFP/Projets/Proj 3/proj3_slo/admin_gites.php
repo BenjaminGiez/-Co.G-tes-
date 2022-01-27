@@ -9,18 +9,7 @@
 </head>
 <body>
     <?php
-    /*
-$mysqli = new mysqli("localhost", "root", "", "gites");
-$mysqli->set_charset("utf8");
-$requete = "SELECT * FROM  mes_gites";
-$result = $mysqli->query($requete);
-while ($ligne = $result->fetch_assoc()){
-    echo $ligne['Nom_gite'] . ' ' . $ligne['Descript_gite'] . ' ' . $ligne['Nbre_couchage'] . ' ';
-    echo $ligne['Nbre_sdb'] . ' ' . $ligne['Emplacement_geo'] .' ' . $ligne['Prix'] . '<br>';
-}
-$mysqli->close();
 
-*/
 ?>
 </body>
 </html>
