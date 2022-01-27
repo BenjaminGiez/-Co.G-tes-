@@ -67,6 +67,17 @@
 </html>
 <?php
 
+
+
+//======================//
+// Connection à la bdd ▼//
+//======================//
+
+$servname = 'localhost';
+$dbname = 'gites';
+$user = 'root';
+$pass = '';
+
 //=======================================================================  //
 //      ▼        AJOUTER DES IMAGES DANS LA BASE DE DONNÉE  !! ▼           //
 //=======================================================================  //
@@ -82,17 +93,6 @@ move_uploaded_file($tmpName, './assets/'.$name);
 }
 
 //=======================================================================  //
-
-
-//======================//
-// Connection à la bdd ▼//
-//======================//
-
-$servname = 'localhost';
-$dbname = 'gites';
-$user = 'root';
-$pass = '';
-
 //=======================================================================//
 // Bouclette pour remplir les lignes de la bdd selon les inputs du form ▼//
 //=======================================================================//
@@ -103,7 +103,7 @@ if (
     isset($_POST['beds'])  && !empty($_POST['beds']) &&
     isset($_POST['brooms'])  && !empty($_POST['brooms']) &&
     isset($_POST['place'])  && !empty($_POST['place']) &&
-    isset($_POST['price'])  && !empty($_POST['price']) 
+    isset($_POST['price'])  && !empty($_POST['price'])
 ) 
 try {
     $dbco = new PDO("mysql:host=$servname;dbname=$dbname", $user, $pass);
